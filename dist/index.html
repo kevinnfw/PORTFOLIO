@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@600;700;800;900&family=Inter+Tight:wght@800;900&family=Inter:wght@800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="preload" as="video" href="/images/IMG_0919.MOV" type="video/quicktime" media="(min-width: 769px)" />
+  <link rel="preload" as="video" href="/images/IMG_0923.MOV" type="video/quicktime" media="(max-width: 768px)" />
+  <link rel="stylesheet" crossorigin href="/assets/index-DxXLQgoh.css">
+</head>
+
+<body class="is-loading">
+  <!-- Opening Animation Preloader (Pure Full Screen Video Animation) -->
+  <div id="site-preloader" class="site-preloader" aria-live="polite" aria-label="Loading Website" role="dialog" aria-modal="true">
+    <!-- Fullscreen Video Background Layer -->
+    <div class="preloader-media-layer">
+      <!-- Desktop Video Animation (IMG_0919.MOV) -->
+      <video
+        id="preloader-video-desktop"
+        class="preloader-video preloader-video-desktop"
+        autoplay
+        muted
+        playsinline
+        loop
+        preload="auto"
+        webkit-playsinline
+      >
+        <source src="/images/IMG_0919.MOV" type="video/quicktime" />
+        <source src="/assets/IMG_0919-Am6PnWaQ.MOV" type="video/quicktime" />
+        <source src="/images/IMG_0919.mp4" type="video/mp4" />
+        <source src="/assets/IMG_0919-Am6PnWaQ.MOV" type="video/mp4" />
+      </video>
+
+      <!-- Mobile Video Animation (IMG_0923.MOV) -->
+      <video
+        id="preloader-video-mobile"
+        class="preloader-video preloader-video-mobile"
+        autoplay
+        muted
+        playsinline
+        loop
+        preload="auto"
+        webkit-playsinline
+      >
+        <source src="/images/IMG_0923.MOV" type="video/quicktime" />
+        <source src="/assets/IMG_0923-C9GX_nx2.MOV" type="video/quicktime" />
+        <source src="/images/IMG_0923.mp4" type="video/mp4" />
+        <source src="/assets/IMG_0923-C9GX_nx2.MOV" type="video/mp4" />
+      </video>
+    </div>
+
+    <!-- Bottom Progress Bar (Pure glowing loading bar, strictly no text banners) -->
+    <div class="preloader-controls" id="preloader-controls">
+      <div class="preloader-progress-track">
+        <div class="preloader-progress-fill" id="preloader-progress-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Background Fixed Scroll Animation Canvas -->
+  <div id="canvas-container">
+    <canvas id="animation-canvas"></canvas>
+    <div class="canvas-overlay"></div>
+  </div>
+
+  <!-- Main Content Container Scrolling Over the Animation -->
+  <div id="content-wrapper">
+    <!-- Navigation Bar -->
+    <header class="navbar">
+      <div class="nav-container">
+        <a href="#grow" class="btn-pill btn-nav">
+          <span>Get in touch</span>
+          <span class="btn-arrow-circle">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="section-hero">
+      <div class="hero-inner">
+        <div class="hero-main-row">
+          <div class="hero-left">
+            <p class="hero-greeting">Hey, I'm Kevin - Informatics Graduate</p>
+            <h1 class="hero-title">
+              Data Scientist <span class="title-divider">|</span><br />
+              Content Planner
+            </h1>
+          </div>
+
+          <div class="hero-right">
+            <div class="hero-quote-card">
+              <h3 class="quote-title">Turning data, ideas, and creativity into meaningful experiences</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Pillars Bar -->
+        <div class="hero-pillars">
+          <div class="pillar-item">
+            <span class="pillar-num">#01</span>
+            <span class="pillar-label">Data Science</span>
+          </div>
+          <div class="pillar-item">
+            <span class="pillar-num">#02</span>
+            <span class="pillar-label">Data Analyst</span>
+          </div>
+          <div class="pillar-item">
+            <span class="pillar-num">#03</span>
+            <span class="pillar-label">Content Planning</span>
+          </div>
+          <div class="pillar-item">
+            <span class="pillar-num">#04</span>
+            <span class="pillar-label">Social Media Management</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Showcase Section -->
+    <section id="experience" class="section-showcase">
+      <div class="showcase-header">
+        <div class="showcase-left">
+          <h2 class="showcase-title">
+            Turning Data &amp; Ideas Into Something Meaningful</h2>
+        </div>
+        <div class="showcase-right">
+          <p class="showcase-desc">
+            I'm an Informatics graduate with an interest in data, technology, and digital content. I enjoy turning data
+            into meaningful insights and ideas into engaging digital experiences.
+          </p>
+        </div>
+      </div>
+
+      <div class="experience-label">
+        <span>EXPERIENCE</span>
+      </div>
+
+      <!-- Interactive Showcase Slider (Globe Express Reference Style) -->
+      <div class="showcase-slider" id="showcase-slider">
+        <!-- Dynamic Background Backdrop Layers with Cross-Fade Transition -->
+        <div class="slider-bg-container">
+          <div class="slider-bg is-active" data-bg-index="0" style="background-image: url('/images/foto-bem.jpg');">
+          </div>
+          <div class="slider-bg" data-bg-index="1" style="background-image: url('/images/foto-diskominfo.jpg');"></div>
+          <div class="slider-bg" data-bg-index="2" style="background-image: url('/images/ig-cuan.png');"></div>
+          <div class="slider-bg" data-bg-index="3" style="background-image: url('/images/logo-tosorvest.jpg');"></div>
+          <div class="slider-bg-overlay"></div>
+        </div>
+
+        <div class="slider-content-layout">
+          <!-- Left Hero Presentation Panel -->
+          <div class="slider-left-info">
+            <div class="slider-tag-wrap">
+              <span class="slider-tag-line"></span>
+              <span class="slider-tag" id="slide-tag">Organization</span>
+            </div>
+
+            <h3 class="slider-headline font-slide-0" id="slide-headline">
+              BEM FIK -<br />PUBLIC RELATIONS
+            </h3>
+
+            <p class="slider-desc" id="slide-desc">
+              Served as an Expert Staff Member of the Public Relations Division at the Faculty of Computer Science
+              Student Executive Board (BEM FIK). Responsible for managing the Content Plan work program, including
+              content planning, scheduling, and organizing content materials using Google Sheets, as well as developing
+              content concepts and visual designs using Figma to support the organization's communication and
+              publication activities.
+            </p>
+
+            <div class="slider-actions">
+              <a href="#grow" class="slider-cta-pill">
+                <span>DISCOVER MORE</span>
+              </a>
+            </div>
+
+            <!-- Bottom Navigation Bar & Progress -->
+            <div class="slider-nav-controls">
+              <div class="slider-arrows">
+                <button class="nav-arrow-btn" id="slide-prev" aria-label="Previous Slide">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </button>
+                <button class="nav-arrow-btn" id="slide-next" aria-label="Next Slide">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Progress bar indicator -->
+              <div class="slider-progress-track">
+                <div class="slider-progress-bar" id="slider-progress-bar" style="width: 25%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Draggable Cards Carousel -->
+          <div class="slider-right-gallery">
+            <div class="cards-draggable-wrapper" id="cards-draggable-wrapper">
+              <div class="cards-carousel-track" id="cards-carousel-track">
+
+                <!-- Card 0 (Kevin PR Photo) -->
+                <div class="showcase-card is-active" data-index="0">
+                  <div class="card-inner-media">
+                    <img src="/images/kevin-pr.PNG" alt="BEM FIK - Public Relations" class="showcase-card-img" />
+                    <div class="card-gradient-veil"></div>
+                  </div>
+                  <div class="card-meta">
+                    <span class="card-sublabel">BEM FIK</span>
+                    <h4 class="card-main-title">PUBLIC RELATIONS</h4>
+                  </div>
+                  <div class="card-active-glow"></div>
+                </div>
+
+                <!-- Card 1 (Gambar Keempat) -->
+                <div class="showcase-card" data-index="1">
+                  <div class="card-inner-media">
+                    <img src="/images/card2-meeting.png" alt="Project Discussion & Synergy" class="showcase-card-img" />
+                    <div class="card-gradient-veil"></div>
+                  </div>
+                  <div class="card-meta">
+                    <span class="card-sublabel">INTERNSHIP</span>
+                    <h4 class="card-main-title">DISKOMINFO SEMARANG</h4>
+                  </div>
+                  <div class="card-active-glow"></div>
+                </div>
+
+                <!-- Card 2 (Gambar Kelima) -->
+                <div class="showcase-card" data-index="2">
+                  <div class="card-inner-media">
+                    <img src="/images/logo-cuan.PNG" alt="Creative Logo & Design" class="showcase-card-img" />
+                    <div class="card-gradient-veil"></div>
+                  </div>
+                  <div class="card-meta">
+                    <span class="card-sublabel">ACCOUNT MANAGEMENT</span>
+                    <h4 class="card-main-title">ONLINE GAMING ACCOUNT BUSINESS</h4>
+                  </div>
+                  <div class="card-active-glow"></div>
+                </div>
+
+                <!-- Card 3 (Gambar Keenam - Placeholder until provided) -->
+                <div class="showcase-card" data-index="3">
+                  <div class="card-inner-media">
+                    <img src="/images/tiktok-tosorvest.PNG" alt="Data Science & Tech" class="showcase-card-img" />
+                    <div class="card-gradient-veil"></div>
+                  </div>
+                  <div class="card-meta">
+                    <span class="card-sublabel">ACCOUNT MANAGEMENT</span>
+                    <h4 class="card-main-title">FINANCIAL CONTENT MANAGEMENT</h4>
+                  </div>
+                  <div class="card-active-glow"></div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Slide Large Outline Number Counter -->
+            <div class="slider-counter" id="slide-counter">01</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section (Dark Background, 3D Rolling Typography, Horizontal Kinetic Alternating Cards) -->
+    <section id="projects" class="section-projects-dark">
+      <!-- Ambient Lighting & Futuristic Backdrop Grid -->
+      <div class="projects-bg-decor" aria-hidden="true">
+        <div class="decor-glow glow-top"></div>
+        <div class="decor-glow glow-bottom"></div>
+        <div class="decor-grid-lines"></div>
+      </div>
+
+      <div class="projects-inner">
+        <!-- Editorial Kinetic Typography Header (Matching Pinterest Video Reference) -->
+        <div class="projects-kinetic-header" id="projects-kinetic-header">
+          <div class="header-corner corner-right">
+            <span class="corner-cross">+</span>
+            <div class="corner-eye-badge" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 8c-3 0-5 4-5 4s2 4 5 4 5-4 5-4-2-4-5-4z" />
+                <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Central Red Accent Stripe (Matching Reference Video) -->
+          <div class="projects-center-stripe"></div>
+
+          <!-- Indicator Accents (Left & Right arrows) -->
+          <div class="header-indicator ind-left">
+            <span class="indicator-triangle">▶</span>
+          </div>
+          <div class="header-indicator ind-right">
+            <span class="indicator-triangle">◀</span>
+          </div>
+
+          <!-- 3-Layer Kinetic Typography Stack (Matching Reference Video Motion) -->
+          <div class="kinetic-title-stage" id="kinetic-title-stage">
+            <!-- Row 1 (Top): Outline PROJECTS shifting horizontally -->
+            <div class="kinetic-row row-top" aria-hidden="true">
+              <span class="kinetic-text">PROJECTS</span>
+            </div>
+
+            <!-- Row 2 (Middle): Solid PROJECTS bold centered on red stripe -->
+            <div class="kinetic-row row-center">
+              <h2 class="kinetic-text">PROJECTS</h2>
+            </div>
+
+            <!-- Row 3 (Bottom): Outline PROJECTS shifting counter-phase horizontally -->
+            <div class="kinetic-row row-bottom" aria-hidden="true">
+              <span class="kinetic-text">PROJECTS</span>
+            </div>
+          </div>
+
+          <!-- Horizontal Cards Interactive Showcase Stage -->
+          <div class="projects-cards-stage">
+            <!-- Compass Dial Graphic in the Background (Matching Reference Image) -->
+            <div class="compass-dial-stage" aria-hidden="true">
+              <svg class="compass-dial-svg" viewBox="0 0 500 500" fill="none">
+                <circle cx="250" cy="250" r="230" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"
+                  stroke-dasharray="4 8" />
+                <circle cx="250" cy="250" r="180" stroke="rgba(255,255,255,0.1)" stroke-width="1"
+                  stroke-dasharray="2 6" />
+                <circle cx="250" cy="250" r="120" stroke="rgba(255,90,31,0.22)" stroke-width="1.2" />
+                <line x1="250" y1="15" x2="250" y2="35" stroke="rgba(255,255,255,0.25)" stroke-width="2" />
+                <line x1="250" y1="465" x2="250" y2="485" stroke="rgba(255,255,255,0.25)" stroke-width="2" />
+                <line x1="15" y1="250" x2="35" y2="250" stroke="rgba(255,255,255,0.25)" stroke-width="2" />
+                <line x1="465" y1="250" x2="485" y2="250" stroke="rgba(255,255,255,0.25)" stroke-width="2" />
+                <!-- Circular Path for Text -->
+                <path id="compassTextPath" d="M 90, 250 a 160,160 0 1,1 320,0 a 160,160 0 1,1 -320,0" fill="none" />
+                <text fill="rgba(255,255,255,0.2)" font-size="10" font-weight="700" letter-spacing="4.5">
+                  <textPath href="#compassTextPath" startOffset="50%" text-anchor="middle">
+                    • PROJECTS • DATA SCIENCE • CONTENT • INNOVATION •
+                  </textPath>
+                </text>
+              </svg>
+              <div class="compass-me-indicator">
+                <span class="me-arrow">▲</span>
+                <span class="me-text">ME</span>
+              </div>
+            </div>
+
+            <!-- Horizontal Cards Fan Cluster Stage (Exact Fan Layout from Reference Image) -->
+            <div class="horizontal-cards-scroller fan-deck-container" id="h-cards-scroller">
+              <div class="horizontal-cards-track fan-deck-track" id="h-cards-track">
+                <!-- Card 1 (Machine Learning) - Oscillates Left to Right -->
+                <div class="h-card h-card-odd" data-card-idx="0">
+                  <div class="h-card-inner">
+                    <div class="h-card-media">
+                      <img src="/assets/arena-kita-BvzUwqoY.png" alt="Machine Learning & Predictive Modeling"
+                        class="h-card-img" />
+                      <div class="h-card-badge">#01 SPORTS BOOKING</div>
+                      <div class="h-card-overlay"></div>
+                    </div>
+                    <div class="h-card-content">
+                      <div class="h-card-header">
+                        <span class="h-card-cat">SPORTS FACILITY BOOKING PLATFORM</span>
+                        <span class="h-card-status">FULL-STACK WEB APP</span>
+                      </div>
+                      <h3 class="h-card-title">ArenaKita — Sports Field Booking Platform</h3>
+                      <p class="h-card-desc">A full-stack web application for discovering and booking sports facilities,
+                        with field search and filtering, booking management, user authentication, and an admin
+                        dashboard.</p>
+                      <div class="h-card-tags">
+                        <span class="h-tag">React</span>
+                        <span class="h-tag">TypeScript</span>
+                        <span class="h-tag">Node.js</span>
+                      </div>
+                      <div class="h-card-footer">
+                        <span class="h-card-link">View Project</span>
+                        <span class="h-card-arrow">↗</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 2 (BI Dashboard) - Oscillates Right to Left -->
+                <div class="h-card h-card-even" data-card-idx="1">
+                  <div class="h-card-inner">
+                    <div class="h-card-media">
+                      <img src="/assets/rebrand-smpn5-DclvE7ZI.jpg" alt="Executive BI & Revenue Dashboard" class="h-card-img" />
+                      <div class="h-card-badge">#02 WEBSITE REDESIGN</div>
+                      <div class="h-card-overlay"></div>
+                    </div>
+                    <div class="h-card-content">
+                      <div class="h-card-header">
+                        <span class="h-card-cat">SCHOOL INFORMATION SYSTEM</span>
+                        <span class="h-card-status">WEB DEVELOPMENT</span>
+                      </div>
+                      <h3 class="h-card-title">SMPN 44 Semarang Website Rebranding</h3>
+                      <p class="h-card-desc">Redesigned a school website featuring school profiles, teacher information,
+                        galleries, announcements, contact forms, and an admin dashboard for content management.</p>
+                      <div class="h-card-tags">
+                        <span class="h-tag">HTML</span>
+                        <span class="h-tag">JavaScript</span>
+                        <span class="h-tag">PHP</span>
+                      </div>
+                      <div class="h-card-footer">
+                        <span class="h-card-link">View Project</span>
+                        <span class="h-card-arrow">↗</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 3 (Content Strategy) - Oscillates Left to Right -->
+                <div class="h-card h-card-odd" data-card-idx="2">
+                  <div class="h-card-inner">
+                    <div class="h-card-media">
+                      <img src="/assets/sell-the-news-D5_Piawt.png" alt="Multi-Channel Content Strategy" class="h-card-img" />
+                      <div class="h-card-badge">#03 SELL-THE-NEWS</div>
+                      <div class="h-card-overlay"></div>
+                    </div>
+                    <div class="h-card-content">
+                      <div class="h-card-header">
+                        <span class="h-card-cat"></span>
+                        <span class="h-card-status">MACHINE LEARNING</span>
+                      </div>
+                      <h3 class="h-card-title">Sell-the-News Detector for Cryptocurrency</h3>
+                      <p class="h-card-desc">A cryptocurrency sell-the-news detection system combining NLP-based news
+                        analysis, Random Forest classification, percentile-based labeling, EWMA, and Z-score statistical
+                        methods.</p>
+                      <div class="h-card-tags">
+                        <span class="h-tag">Python</span>
+                        <span class="h-tag">Flask</span>
+                        <span class="h-tag">NLP</span>
+                      </div>
+                      <div class="h-card-footer">
+                        <span class="h-card-link">View Project</span>
+                        <span class="h-card-arrow">↗</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 4 (E-Commerce Account Growth) - Oscillates Right to Left -->
+                <div class="h-card h-card-even" data-card-idx="3">
+                  <div class="h-card-inner">
+                    <div class="h-card-media">
+                      <img src="/images/warung-ajib.jpg" alt="Online Gaming Business Scaling" class="h-card-img" />
+                      <div class="h-card-badge">#04 MOBILE APPLICATION</div>
+                      <div class="h-card-overlay"></div>
+                    </div>
+                    <div class="h-card-content">
+                      <div class="h-card-header">
+                        <span class="h-card-cat">DIGITAL COMMERCE</span>
+                        <span class="h-card-status">UMKM SOLUTION</span>
+                      </div>
+                      <h3 class="h-card-title">Warung Ajib — UMKM Mobile App</h3>
+                      <p class="h-card-desc">A mobile application for small business operations, featuring user
+                        authentication, product browsing, shopping cart management, and order processing to support a
+                        convenient digital shopping experience.</p>
+                      <div class="h-card-tags">
+                        <span class="h-tag">Flutter</span>
+                        <span class="h-tag">Dart</span>
+                        <span class="h-tag">Firebase</span>
+                      </div>
+                      <div class="h-card-footer">
+                        <span class="h-card-link">View Project</span>
+                        <span class="h-card-arrow">↗</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 5 (Diskominfo Rebranding) - Oscillates Left to Right -->
+                <div class="h-card h-card-odd" data-card-idx="4">
+                  <div class="h-card-inner">
+                    <div class="h-card-media">
+                      <img src="/images/nyari-kopi.png" alt="Public Sector Web Rebranding" class="h-card-img" />
+                      <div class="h-card-badge">#05 ONLINE COFFEE ORDERING</div>
+                      <div class="h-card-overlay"></div>
+                    </div>
+                    <div class="h-card-content">
+                      <div class="h-card-header">
+                        <span class="h-card-cat">LOCAL COFFEE BUSINESS</span>
+                        <span class="h-card-status">ORDER MANAGEMENT</span>
+                      </div>
+                      <h3 class="h-card-title">NyariKopi (NAPI) — Online Mobile Coffee Cart Ordering</h3>
+                      <p class="h-card-desc">A location-based coffee ordering platform that connects customers with
+                        nearby mobile coffee carts, enables cart drivers to receive orders online, and allows admins to
+                        monitor customer orders.</p>
+                      <div class="h-card-tags">
+                        <span class="h-tag">HTML</span>
+                        <span class="h-tag">CSS</span>
+                        <span class="h-tag">PHP</span>
+                      </div>
+                      <div class="h-card-footer">
+                        <span class="h-card-link">View Project</span>
+                        <span class="h-card-arrow">↗</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 6 (Financial TikTok Scaling) - Oscillates Right to Left -->
+                <div class="h-card h-card-even" data-card-idx="5">
+                  <div class="h-card-inner">
+                    <div class="h-card-media">
+                      <img src="/images/heatmap-responsids.png" alt="Financial Market Visual Content"
+                        class="h-card-img" />
+                      <div class="h-card-badge">#06 DIABETES PREDICTION</div>
+                      <div class="h-card-overlay"></div>
+                    </div>
+                    <div class="h-card-content">
+                      <div class="h-card-header">
+                        <span class="h-card-cat">HEALTHCARE ANALYTICS</span>
+                        <span class="h-card-status">MACHINE LEARNING</span>
+                      </div>
+                      <h3 class="h-card-title">Diabetes Prediction Using Machine Learning</h3>
+                      <p class="h-card-desc">Analyzed diabetes data through data preprocessing, exploratory data
+                        analysis, and machine learning classification, comparing model performance using evaluation
+                        metrics and techniques to address class imbalance.</p>
+                      <div class="h-card-tags">
+                        <span class="h-tag">Python</span>
+                        <span class="h-tag">Pandas</span>
+                        <span class="h-tag">SMOTE</span>
+                      </div>
+                      <div class="h-card-footer">
+                        <span class="h-card-link">View Project</span>
+                        <span class="h-card-arrow">↗</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Bottom Navigation Controls -->
+            <div class="horizontal-controls-bar">
+              <button class="h-nav-arrow" id="h-card-prev" aria-label="Previous Project Card">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <div class="h-status-indicator">
+                <span class="h-dot-pulse"></span>
+                <span class="h-status-text">DRAG OR CLICK TO EXPLORE</span>
+              </div>
+              <button class="h-nav-arrow" id="h-card-next" aria-label="Next Project Card">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <!-- =============================================================
+         3D MOTION GRAPHICS ANIMATION SECTION: CERTIFICATIONS
+         Positioned immediately after Projects, before Ready to Grow.
+         3D Rotating Carousel / Circular Gallery matching motion graphics reference.
+         ============================================================= -->
+    <section id="certifications" class="section-certifications" aria-label="Certifications Showcase">
+      <div class="cert-bg-vignette" aria-hidden="true"></div>
+
+      <div class="cert-inner-container">
+        <!-- 3D Perspective Stage Viewport -->
+        <div class="cert-stage-viewport" id="cert-viewport">
+
+          <!-- Center Heading Layer in 3D space: Stacked exactly like "A Year of \n Building" in reference -->
+          <div class="cert-heading-layer" aria-hidden="false">
+            <h2 class="cert-headline">
+              <span class="cert-headline-row cert-line-top">CERTIFI</span>
+              <span class="cert-headline-row cert-line-bottom">CATIONS</span>
+            </h2>
+          </div>
+
+          <!-- 3D Circular Orbit Ring (preserves 3D space) -->
+          <div class="cert-carousel-stage" id="cert-carousel-stage">
+            <div class="cert-carousel-ring" id="cert-carousel-ring">
+
+              <!-- Card 1: BNSP Sertifikasi Data Science -->
+              <div class="cert-card-slot" data-index="0">
+                <article class="cert-card-inner theme-teal-health">
+                  <div class="cert-card-face cert-card-front">
+                    <div class="cert-media-wrap">
+                      <img src="/images/sertifikasi-bnsp.JPG" alt="Sertifikasi Kompetensi BNSP Data Science"
+                        class="cert-image" loading="eager" decoding="async" />
+                      <div class="cert-media-overlay"></div>
+                    </div>
+                    <div class="cert-card-glass"></div>
+                    <div class="cert-zoom-badge"><span>Click to discover</span></div>
+                    <div class="cert-card-header">
+                      <div class="cert-issuer-badge">
+                        <span class="cert-badge-dot"></span>
+                        <span class="cert-badge-org">BNSP INDONESIA</span>
+                      </div>
+                      <span class="cert-cat-pill">DATA SCIENCE</span>
+                    </div>
+                    <div class="cert-card-body">
+                      <h3 class="cert-card-title">Sertifikasi Kompetensi Data Science</h3>
+                      <p class="cert-card-desc">Badan Nasional Sertifikasi Profesi &bull; Machine Learning &bull; Data
+                        Analyst</p>
+                    </div>
+                    <div class="cert-card-footer">
+                      <div class="cert-tags">
+                        <span class="cert-tag">Python</span>
+                        <span class="cert-tag">Analytics</span>
+                      </div>
+                      <div class="cert-cred-row">
+                        <span class="cert-cred-id"></span>
+                        <span class="cert-verify-link" title="View organizational certificate">
+            View Certificate ↗
+          </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cert-card-face cert-card-back">
+                    <div class="cert-back-inner">
+                      <div class="cert-back-seal">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                          stroke-width="2">
+                          <circle cx="12" cy="12" r="10" />
+                          <path d="M9 12l2 2 4-4" />
+                        </svg>
+                      </div>
+                      <span class="cert-back-org">BNSP INDONESIA</span>
+                      <span class="cert-back-status">OFFICIAL CREDENTIAL</span>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+<!-- Card 2: BEM FIK Staff Public Relations Certificate -->
+<div class="cert-card-slot" data-index="1">
+  <article class="cert-card-inner theme-pitcrew-dark">
+    <div class="cert-card-face cert-card-front">
+      <div class="cert-media-wrap">
+        <img
+          src="/assets/sertifikat-bem-BfKe1LiS.JPG"
+          alt="BEM FIK Staff Public Relations Certificate"
+          class="cert-image"
+          loading="eager"
+          decoding="async"
+        />
+        <div class="cert-media-overlay"></div>
+      </div>
+
+      <div class="cert-card-glass"></div>
+      <div class="cert-zoom-badge">
+        <span>Click to discover</span>
+      </div>
+
+      <div class="cert-card-header">
+        <div class="cert-issuer-badge">
+          <span class="cert-badge-dot"></span>
+          <span class="cert-badge-org">BEM FIK</span>
+        </div>
+        <span class="cert-cat-pill">ORGANIZATION</span>
+      </div>
+
+      <div class="cert-card-body">
+        <h3 class="cert-card-title">
+          Staff of Public Relations
+        </h3>
+        <p class="cert-card-desc">
+          BEM FIK • Public Relations Division • Organizational Experience
+        </p>
+      </div>
+
+      <div class="cert-card-footer">
+        <div class="cert-tags">
+          <span class="cert-tag">Communication</span>
+          <span class="cert-tag">Teamwork</span>
+        </div>
+        <div class="cert-cred-row">
+          <span class="cert-verify-link" title="View organizational certificate">
+            View Certificate ↗
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cert-card-face cert-card-back">
+      <div class="cert-back-inner">
+        <div class="cert-back-seal">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M9 12l2 2 4-4" />
+          </svg>
+        </div>
+        <span class="cert-back-org">BEM FIK</span>
+        <span class="cert-back-status">ORGANIZATIONAL EXPERIENCE</span>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- Card 3: LKMM-TD 2024 -->
+<div class="cert-card-slot" data-index="2">
+  <article class="cert-card-inner theme-frosted-bubble">
+    <div class="cert-card-face cert-card-front">
+      <div class="cert-media-wrap">
+        <img
+          src="/assets/sertifikat-lkmmtd-BnxLf7vn.JPG"
+          alt="LKMM-TD 2024 Certificate - Universitas Dian Nuswantoro"
+          class="cert-image"
+          loading="eager"
+          decoding="async"
+        />
+        <div class="cert-media-overlay"></div>
+      </div>
+
+      <div class="cert-card-glass"></div>
+      <div class="cert-zoom-badge">
+        <span>Click to discover</span>
+      </div>
+
+      <div class="cert-card-header">
+        <div class="cert-issuer-badge">
+          <span class="cert-badge-dot"></span>
+          <span class="cert-badge-org">UDINUS • BEM FIK</span>
+        </div>
+        <span class="cert-cat-pill">LEADERSHIP</span>
+      </div>
+
+      <div class="cert-card-body">
+        <h3 class="cert-card-title">LKMM-TD 2024</h3>
+        <p class="cert-card-desc">
+          Student Leadership and Management Training
+          &bull; Universitas Dian Nuswantoro
+          &bull; Organized by BEM FIK
+        </p>
+      </div>
+
+      <div class="cert-card-footer">
+        <div class="cert-tags">
+          <span class="cert-tag">Leadership</span>
+          <span class="cert-tag">Teamwork</span>
+        </div>
+        <div class="cert-cred-row">
+          <span class="cert-verify-link" title="View full certificate">
+            View Certificate ↗
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cert-card-face cert-card-back">
+      <div class="cert-back-inner">
+        <div class="cert-back-seal">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M9 12l2 2 4-4" />
+          </svg>
+        </div>
+        <span class="cert-back-org">UNIVERSITAS DIAN NUSWANTORO</span>
+        <span class="cert-back-status">LEADERSHIP TRAINING</span>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- Card 4: BASS AI Literacy for Everyone -->
+<div class="cert-card-slot" data-index="3">
+  <article class="cert-card-inner theme-visual-editorial">
+    <div class="cert-card-face cert-card-front">
+      <div class="cert-media-wrap">
+        <img
+          src="/assets/sertifikat-bass-BG3Jj1rQ.JPG"
+          alt="AI Literacy for Everyone: Understand, Apply, Create Certificate"
+          class="cert-image"
+          loading="eager"
+          decoding="async"
+        />
+        <div class="cert-media-overlay"></div>
+      </div>
+
+      <div class="cert-card-glass"></div>
+      <div class="cert-zoom-badge">
+        <span>Click to Discover</span>
+      </div>
+
+      <div class="cert-card-header">
+        <div class="cert-issuer-badge">
+          <span class="cert-badge-dot"></span>
+          <span class="cert-badge-org">BASS TRAINING CENTER</span>
+        </div>
+        <span class="cert-cat-pill">AI LITERACY</span>
+      </div>
+
+      <div class="cert-card-body">
+        <h3 class="cert-card-title">
+          AI Literacy for Everyone
+        </h3>
+        <p class="cert-card-desc">
+          Understand, Apply, Create • AI Literacy • Digital Skills
+        </p>
+      </div>
+
+      <div class="cert-card-footer">
+        <div class="cert-tags">
+          <span class="cert-tag">AI Literacy</span>
+          <span class="cert-tag">Generative AI</span>
+        </div>
+
+        <div class="cert-cred-row">
+          <span
+            class="cert-verify-link"
+            title="View certificate"
+          >View Certificate ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cert-card-face cert-card-back">
+      <div class="cert-back-inner">
+        <div class="cert-back-seal">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M9 12l2 2 4-4" />
+          </svg>
+        </div>
+        <span class="cert-back-org">BASS TRAINING CENTER</span>
+        <span class="cert-back-status">CERTIFICATE OF APPRECIATION</span>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- Card 5: Workshop Bimbingan Karir TI-SI -->
+<div class="cert-card-slot" data-index="4">
+  <article class="cert-card-inner theme-visual-editorial">
+    <div class="cert-card-face cert-card-front">
+      <div class="cert-media-wrap">
+        <img
+          src="/assets/sertifikat-pcp-Bzp5a1rY.JPG"
+          alt="Sertifikat Workshop Bimbingan Karir TI-SI Udinus"
+          class="cert-image"
+          loading="eager"
+          decoding="async"
+        />
+        <div class="cert-media-overlay"></div>
+      </div>
+
+      <div class="cert-card-glass"></div>
+      <div class="cert-zoom-badge">
+        <span>Click to discover</span>
+      </div>
+
+      <div class="cert-card-header">
+        <div class="cert-issuer-badge">
+          <span class="cert-badge-dot"></span>
+          <span class="cert-badge-org">UDINUS • FIK</span>
+        </div>
+        <span class="cert-cat-pill">CAREER DEVELOPMENT</span>
+      </div>
+
+      <div class="cert-card-body">
+        <h3 class="cert-card-title">
+          Workshop Bimbingan Karir TI-SI
+        </h3>
+        <p class="cert-card-desc">
+          Career Development &bull; Professional Preparation &bull;
+          Informatics Career Guidance
+        </p>
+      </div>
+
+      <div class="cert-card-footer">
+        <div class="cert-tags">
+          <span class="cert-tag">Career Planning</span>
+          <span class="cert-tag">Professional Development</span>
+        </div>
+
+        <div class="cert-cred-row">
+          <span
+            class="cert-verify-link"
+            title="View full certificate"
+          >View Certificate ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cert-card-face cert-card-back">
+      <div class="cert-back-inner">
+        <div class="cert-back-seal">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M9 12l2 2 4-4" />
+          </svg>
+        </div>
+        <span class="cert-back-org">
+          UNIVERSITAS DIAN NUSWANTORO
+        </span>
+        <span class="cert-back-status">
+          CERTIFICATE OF PARTICIPATION
+        </span>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- Card 6: Pelantikan Calon Pengurus BEM FIK 2024 -->
+<div class="cert-card-slot" data-index="5">
+  <article class="cert-card-inner theme-fluid-ribbon">
+    <div class="cert-card-face cert-card-front">
+      <div class="cert-media-wrap">
+        <img
+          src="/images/sertifikat-pengurus.JPG"
+          alt="Sertifikat Pelantikan Calon Pengurus BEM FIK UDINUS 2024"
+          class="cert-image"
+          loading="eager"
+          decoding="async"
+        />
+        <div class="cert-media-overlay"></div>
+      </div>
+
+      <div class="cert-card-glass"></div>
+      <div class="cert-zoom-badge">
+        <span>Click to Discover</span>
+      </div>
+
+      <div class="cert-card-header">
+        <div class="cert-issuer-badge">
+          <span class="cert-badge-dot"></span>
+          <span class="cert-badge-org">BEM FIK UDINUS</span>
+        </div>
+        <span class="cert-cat-pill">ORGANIZATION</span>
+      </div>
+
+      <div class="cert-card-body">
+        <h3 class="cert-card-title">
+          BEM FIK Candidate Board Inauguration
+        </h3>
+        <p class="cert-card-desc">
+          Organizational Inauguration &bull; Student Organization
+          &bull; BEM FIK UDINUS 2024
+        </p>
+      </div>
+
+      <div class="cert-card-footer">
+        <div class="cert-tags">
+          <span class="cert-tag">Inauguration</span>
+          <span class="cert-tag">Organization</span>
+        </div>
+
+        <div class="cert-cred-row">
+          <span
+            class="cert-verify-link"
+            title="View full certificate"
+          >View Certificate ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cert-card-face cert-card-back">
+      <div class="cert-back-inner">
+        <div class="cert-back-seal">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M9 12l2 2 4-4" />
+          </svg>
+        </div>
+        <span class="cert-back-org">BEM FIK UDINUS</span>
+        <span class="cert-back-status">
+          CANDIDATE BOARD INAUGURATION
+        </span>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- Card 7: TOEFL ITP Certificate -->
+<div class="cert-card-slot" data-index="6">
+  <article class="cert-card-inner theme-onyx-crescent">
+    <div class="cert-card-face cert-card-front">
+      <div class="cert-media-wrap">
+        <img
+          src="/images/sertif-toefl.JPG"
+          alt="TOEFL ITP Certificate of Achievement - Citra Buana Indonesia"
+          class="cert-image"
+          loading="eager"
+          decoding="async"
+        />
+        <div class="cert-media-overlay"></div>
+      </div>
+
+      <div class="cert-card-glass"></div>
+      <div class="cert-zoom-badge">
+        <span>Click to Discover</span>
+      </div>
+
+      <div class="cert-card-header">
+        <div class="cert-issuer-badge">
+          <span class="cert-badge-dot"></span>
+          <span class="cert-badge-org">CBI CIAMIS</span>
+        </div>
+        <span class="cert-cat-pill">ENGLISH PROFICIENCY</span>
+      </div>
+
+      <div class="cert-card-body">
+        <h3 class="cert-card-title">
+          TOEFL ITP Certificate of Achievement
+        </h3>
+        <p class="cert-card-desc">
+          English Proficiency Test &bull; Listening Comprehension
+          &bull; Structure &amp; Written Expression &bull; Reading Comprehension
+        </p>
+      </div>
+
+      <div class="cert-card-footer">
+        <div class="cert-tags">
+          <span class="cert-tag">TOEFL ITP</span>
+          <span class="cert-tag">Score: 557</span>
+        </div>
+
+        <div class="cert-cred-row">
+          <span
+            class="cert-verify-link"
+            title="View full certificate"
+          >View Certificate ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cert-card-face cert-card-back">
+      <div class="cert-back-inner">
+        <div class="cert-back-seal">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M9 12l2 2 4-4" />
+          </svg>
+        </div>
+        <span class="cert-back-org">
+          CITRA BUANA INDONESIA
+        </span>
+        <span class="cert-back-status">
+          CERTIFICATE OF ACHIEVEMENT
+        </span>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- Card 8: SINAU Seminar Nasional UDINUS 2022 -->
+<div class="cert-card-slot" data-index="7">
+  <article class="cert-card-inner theme-sunflower-art">
+    <div class="cert-card-face cert-card-front">
+      <div class="cert-media-wrap">
+        <img
+          src="/images/sertif-sinau.PNG"
+          alt="Sertifikat Peserta SINAU Seminar Nasional UDINUS 2022"
+          class="cert-image"
+          loading="eager"
+          decoding="async"
+        />
+        <div class="cert-media-overlay"></div>
+      </div>
+
+      <div class="cert-card-glass"></div>
+      <div class="cert-zoom-badge">
+        <span>Click to Discover</span>
+      </div>
+
+      <div class="cert-card-header">
+        <div class="cert-issuer-badge">
+          <span class="cert-badge-dot"></span>
+          <span class="cert-badge-org">UDINUS</span>
+        </div>
+        <span class="cert-cat-pill">SEMINAR</span>
+      </div>
+
+      <div class="cert-card-body">
+        <h3 class="cert-card-title">
+          SINAU — National Seminar UDINUS
+        </h3>
+        <p class="cert-card-desc">
+          Seminar Participation &bull; Entrepreneurship
+          &bull; Business Inspiration
+        </p>
+      </div>
+
+      <div class="cert-card-footer">
+        <div class="cert-tags">
+          <span class="cert-tag">Seminar</span>
+          <span class="cert-tag">Entrepreneurship</span>
+        </div>
+
+        <div class="cert-cred-row">
+          <span
+            class="cert-verify-link"
+            title="View full certificate"
+          >View Certificate ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cert-card-face cert-card-back">
+      <div class="cert-back-inner">
+        <div class="cert-back-seal">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M9 12l2 2 4-4" />
+          </svg>
+        </div>
+        <span class="cert-back-org">
+          UNIVERSITAS DIAN NUSWANTORO
+        </span>
+        <span class="cert-back-status">
+          CERTIFICATE OF PARTICIPATION
+        </span>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- Card 9: World Cleanup Day Jawa Tengah 2025 -->
+<div class="cert-card-slot" data-index="8">
+  <article class="cert-card-inner theme-white-emerald">
+    <div class="cert-card-face cert-card-front">
+      <div class="cert-media-wrap">
+        <img
+          src="/images/sertif-WCD.JPG"
+          alt="Certificate of Participation - World Cleanup Day Jawa Tengah 2025"
+          class="cert-image"
+          loading="eager"
+          decoding="async"
+        />
+        <div class="cert-media-overlay"></div>
+      </div>
+
+      <div class="cert-card-glass"></div>
+      <div class="cert-zoom-badge">
+        <span>Click to Discover</span>
+      </div>
+
+      <div class="cert-card-header">
+        <div class="cert-issuer-badge">
+          <span class="cert-badge-dot"></span>
+          <span class="cert-badge-org">WORLD CLEANUP DAY</span>
+        </div>
+        <span class="cert-cat-pill">ENVIRONMENTAL ACTION</span>
+      </div>
+
+      <div class="cert-card-body">
+        <h3 class="cert-card-title">
+          World Cleanup Day Jawa Tengah 2025
+        </h3>
+        <p class="cert-card-desc">
+          Event Committee &bull; Environmental Awareness
+          &bull; Community Participation
+        </p>
+      </div>
+
+      <div class="cert-card-footer">
+        <div class="cert-tags">
+          <span class="cert-tag">Event Committee</span>
+          <span class="cert-tag">Community</span>
+        </div>
+
+        <div class="cert-cred-row">
+          <span
+            class="cert-verify-link"
+            title="View full certificate"
+          >View Certificate ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cert-card-face cert-card-back">
+      <div class="cert-back-inner">
+        <div class="cert-back-seal">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M9 12l2 2 4-4" />
+          </svg>
+        </div>
+        <span class="cert-back-org">
+          WORLD CLEANUP DAY JAWA TENGAH
+        </span>
+        <span class="cert-back-status">
+          CERTIFICATE OF PARTICIPATION
+        </span>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- Card 10: DINUS INSIDE 2022 -->
+<div class="cert-card-slot" data-index="9">
+  <article class="cert-card-inner theme-sunset-gradient">
+    <div class="cert-card-face cert-card-front">
+      <div class="cert-media-wrap">
+        <img
+          src="/images/sertif-DI.JPG"
+          alt="Sertifikat Peserta DINUS INSIDE Universitas Dian Nuswantoro 2022"
+          class="cert-image"
+          loading="eager"
+          decoding="async"
+        />
+        <div class="cert-media-overlay"></div>
+      </div>
+
+      <div class="cert-card-glass"></div>
+      <div class="cert-zoom-badge">
+        <span>Click to Discover</span>
+      </div>
+
+      <div class="cert-card-header">
+        <div class="cert-issuer-badge">
+          <span class="cert-badge-dot"></span>
+          <span class="cert-badge-org">UDINUS</span>
+        </div>
+        <span class="cert-cat-pill">STUDENT ORIENTATION</span>
+      </div>
+
+      <div class="cert-card-body">
+        <h3 class="cert-card-title">
+          DINUS INSIDE 2022
+        </h3>
+        <p class="cert-card-desc">
+          University Orientation &bull; Student Participation
+          &bull; Academic Community Introduction
+        </p>
+      </div>
+
+      <div class="cert-card-footer">
+        <div class="cert-tags">
+          <span class="cert-tag">Orientation</span>
+          <span class="cert-tag">Student Life</span>
+        </div>
+
+        <div class="cert-cred-row">
+          <span
+            class="cert-verify-link"
+            title="View full certificate"
+          >View Certificate ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cert-card-face cert-card-back">
+      <div class="cert-back-inner">
+        <div class="cert-back-seal">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M9 12l2 2 4-4" />
+          </svg>
+        </div>
+        <span class="cert-back-org">
+          UNIVERSITAS DIAN NUSWANTORO
+        </span>
+        <span class="cert-back-status">
+          CERTIFICATE OF PARTICIPATION
+        </span>
+      </div>
+    </div>
+  </article>
+</div>
+
+          <!-- Bottom Interaction Controls Bar -->
+          <div class="cert-controls-bar">
+            <button class="cert-nav-btn" id="cert-btn-prev" aria-label="Rotate Previous Certification">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+            <div class="cert-status-indicator">
+              <span class="cert-dot-pulse"></span>
+              <span class="cert-status-text">CLICK CARD TO ZOOM &bull; CLICK AGAIN TO RESUME</span>
+            </div>
+            <button class="cert-nav-btn" id="cert-btn-next" aria-label="Rotate Next Certification">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Fullscreen Certificate Lightbox Modal (Ultra High Clarity) -->
+    <div id="cert-modal" class="cert-modal" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="cert-modal-backdrop" id="cert-modal-backdrop"></div>
+      <div class="cert-modal-dialog">
+        <button class="cert-modal-close" id="cert-modal-close" aria-label="Close Certificate Preview">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <div class="cert-modal-card">
+          <div class="cert-modal-img-wrap">
+            <img id="cert-modal-img" src="" alt="Certificate Preview" class="cert-modal-img" />
+          </div>
+          <div class="cert-modal-info">
+            <div class="cert-modal-badge" id="cert-modal-org">ORGANIZATION</div>
+            <h3 class="cert-modal-title" id="cert-modal-title">Certificate Title</h3>
+            <p class="cert-modal-desc" id="cert-modal-desc">Certificate Description</p>
+            <div class="cert-modal-meta">
+              <span class="cert-modal-id" id="cert-modal-id">ID: #0000</span>
+              <span class="cert-modal-status">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                Verified &amp; Authenticated Credential
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ready to Grow & Scale Your Company Section with Intake Form + QR Code Card -->
+    <section id="grow" class="section-grow">
+      <div class="grow-inner">
+        <!-- Section Title Header -->
+        <div class="grow-header">
+          <div class="grow-title-block">
+            <h2 class="grow-headline">
+              <span class="headline-light">GET IN</span><br />
+              <span class="headline-bold">TOUCH</span>
+              <span class="headline-sub">&amp; LET'S CONNECT</span>
+            </h2>
+          </div>
+          <div class="grow-talk-pill">
+            <span class="talk-tag">LET'S WORK TOGETHER</span>
+            <p class="talk-desc">Open to new opportunities, meaningful collaborations, and exciting projects.
+            </p>
+          </div>
+        </div>
+
+        <!-- Main Layout: Form + QR Code Card -->
+        <div class="grow-layout">
+          <!-- 2-Column Intake Form -->
+          <!-- Intake Contact Form (Exact match to screenshot reference) -->
+          <form class="grow-form" id="contact-form" action="https://formsubmit.co/kevinfarell1958@gmail.com" method="POST">
+            <!-- Hidden configuration fields for FormSubmit.co delivery to kevinfarell1958@gmail.com -->
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_subject" id="form-subject-hidden" value="[Portfolio Contact] New Inquiry" />
+
+            <span class="bold">Have a job opportunity or want to discuss a potential collaboration? Send me a message.</span>
+
+            <!-- Row 1: YOUR NAME * | YOUR EMAIL * -->
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="user-name">YOUR NAME *</label>
+                <input type="text" id="user-name" name="name" class="form-input" placeholder="Your full name" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="user-email">YOUR EMAIL *</label>
+                <input type="email" id="user-email" name="email" class="form-input" placeholder="you@example.com" required />
+              </div>
+            </div>
+
+            <!-- Row 2: COMPANY / ORGANIZATION * | SUBJECT / INQUIRY TYPE * -->
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="user-company">COMPANY / ORGANIZATION *</label>
+                <input type="text" id="user-company" name="company" class="form-input" placeholder="Company name" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="user-inquiry">SUBJECT / INQUIRY TYPE *</label>
+                <div class="select-wrapper">
+                  <select id="user-inquiry" name="inquiry_type" class="form-select" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="Job Opportunity">Job Opportunity</option>
+                    <option value="Interview Invitation">Interview Invitation</option>
+                    <option value="Internship">Internship</option>
+                    <option value="Collaboration">Collaboration</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Row 3: YOUR MESSAGE * -->
+            <div class="form-row form-row-full">
+              <div class="form-group form-group-full">
+                <label class="form-label" for="user-message">YOUR MESSAGE *</label>
+                <textarea id="user-message" name="message" class="form-textarea" rows="4" placeholder="Tell me about the opportunity..." required></textarea>
+              </div>
+            </div>
+
+            <!-- Row 4: Submit Button (Full Width) -->
+            <div class="form-submit-row">
+              <button type="submit" class="btn-submit-message" id="contact-submit-btn">
+                <span class="btn-text">SEND MESSAGE</span>
+                <span class="btn-arrow-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </span>
+              </button>
+            </div>
+
+            <!-- Form Status Notification Alert -->
+            <div id="form-status" class="form-status-alert" style="display: none;" role="alert"></div>
+          </form>
+
+          <!-- Companion QR Code Card -->
+          <aside class="qr-card">
+            <div class="qr-card-header">
+              <div class="qr-status-pill">
+                <span class="status-dot"></span>
+                <span>One Scan, All Links</span>
+              </div>
+              <p class="qr-subtitle">Scan the QR code to explore my social media, and other online platforms.</p>
+            </div>
+
+            <div class="qr-frame">
+              <img src="/assets/qrcode-linktree-D_L8hcLe.png" alt="Scan QR Code to Connect" class="qr-image" />
+              <div class="qr-scan-line"></div>
+            </div>
+
+            <div class="qr-footer">
+              <span class="qr-meta-label">Kevin | Data &amp; Content</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-container">
+        <p>© 2026 Kevin. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/lenis.min.js"></script>
+  <script src="/main.js"></script>
+</body>
+
+</html>
