@@ -61,35 +61,40 @@
 
 
   function drawFrame(index) {
-    // Jangan menggambar frame jika gambar yang diminta belum selesai dimuat.
-    if (!loadedFlags[index]) return;
+  // Jangan menggambar frame yang belum selesai dimuat.
+  if (!loadedFlags[index]) return false;
 
-    const img = images[index];
+  const img = images[index];
 
-    if (!img || !img.naturalWidth || !img.naturalHeight) return;
-
-    const canvasWidth = canvas.width;
-    const canvasHeight = canvas.height;
-
-    const canvasRatio = canvasWidth / canvasHeight;
-    const imageRatio = img.naturalWidth / img.naturalHeight;
-
-    let drawW, drawH, drawX, drawY;
-
-    if (canvasRatio > imageRatio) {
-      drawW = canvasWidth;
-      drawH = canvasWidth / imageRatio;
-      drawX = 0;
-      drawY = (canvasHeight - drawH) / 2;
-    } else {
-      drawH = canvasHeight;
-      drawW = canvasHeight * imageRatio;
-      drawX = (canvasWidth - drawW) / 2;
-      drawY = 0;
-    }
-
-    ctx.drawImage(img, drawX, drawY, drawW, drawH);
+  if (!img || !img.naturalWidth || !img.naturalHeight) {
+    return false;
   }
+
+  const canvasWidth = canvas.width;
+  const canvasHeight = canvas.height;
+
+  const canvasRatio = canvasWidth / canvasHeight;
+  const imageRatio = img.naturalWidth / img.naturalHeight;
+
+  let drawW, drawH, drawX, drawY;
+
+  if (canvasRatio > imageRatio) {
+    drawW = canvasWidth;
+    drawH = canvasWidth / imageRatio;
+    drawX = 0;
+    drawY = (canvasHeight - drawH) / 2;
+  } else {
+    drawH = canvasHeight;
+    drawW = canvasHeight * imageRatio;
+    drawX = (canvasWidth - drawW) / 2;
+    drawY = 0;
+  }
+
+  ctx.drawImage(img, drawX, drawY, drawW, drawH);
+
+  // Tandai berhasil hanya jika gambar benar-benar digambar.
+  return true;
+}
 
   function pumpLoadQueue() {
     while (
@@ -132,22 +137,6 @@
         loadedFlags[bestIndex] = true;
         loadingFlags[bestIndex] = false;
         activeLoads--;
-
-        const currentIndex = Math.min(
-          TOTAL_FRAMES - 1,
-          Math.max(0, Math.round(currentFrame))
-        );
-
-        // Segera tampilkan frame target jika baru selesai dimuat.
-        // Jika belum, perbarui fallback agar gerakan tidak membeku.
-        if (
-          currentIndex === bestIndex ||
-          !loadedFlags[currentIndex]
-        ) {
-          drawFrame(currentIndex);
-          lastDrawnIndex = currentIndex;
-        }
-
         pumpLoadQueue();
       };
 
@@ -287,19 +276,24 @@
       Math.max(0, Math.round(currentFrame))
     );
 
-    // Gambar ulang hanya jika frame berubah.
+    
+    // Perbarui indeks hanya jika frame berhasil digambar.
+    // Jika belum siap, pertahankan gambar terakhir dan coba lagi.
     if (frameIndex !== lastDrawnIndex) {
-      drawFrame(frameIndex);
-      lastDrawnIndex = frameIndex;
+      const didDraw = drawFrame(frameIndex);
+
+      if (didDraw) {
+        lastDrawnIndex = frameIndex;
+      }
     }
-  }
+  } // <-- Penutup function render(time)
 
   // Siapkan Canvas dan mulai dari frame awal.
   resizeCanvas();
   updatePreloadQueue(0);
 
   requestAnimationFrame(render);
-})();
+})(); // <-- Penutup IIFE animasi pertama
 
 /* -------------------------------------------------------------
    Globe Express Style Interactive Showcase Carousel Controller
