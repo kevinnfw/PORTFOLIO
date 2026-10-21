@@ -3211,6 +3211,17 @@ body {
   cursor: grabbing;
 }
 
+/* Temporarily hidden when a certificate is selected / zoomed */
+.cert-drag-controls.is-hidden {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateY(14px) scale(0.92);
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.3s ease;
+}
+
 .cert-drag-nav-btn {
   display: inline-flex;
   align-items: center;
