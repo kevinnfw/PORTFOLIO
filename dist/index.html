@@ -10,12 +10,12 @@
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@600;700;800;900&family=Inter+Tight:wght@800;900&family=Inter:wght@800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@700;800&display=swap"
     rel="stylesheet" />
   <link rel="preload" as="video" href="/images/IMG_0919.MOV" type="video/quicktime" media="(min-width: 769px)" />
-  <link rel="preload" as="video" href="/images/IMG_0923.MOV" type="video/quicktime" media="(max-width: 768px)" />
-  <link rel="stylesheet" crossorigin href="/assets/index-DxXLQgoh.css">
+  <link rel="preload" as="video" href="/images/IMG_0956.MP4" type="video/mp4" media="(max-width: 768px)" />
+  <link rel="stylesheet" crossorigin href="/assets/index-BFoMzOU8.css">
 </head>
 
 <body class="is-loading">
-  <!-- Opening Animation Preloader (Pure Full Screen Video Animation) -->
+  <!-- Opening Animation Preloader (Pure Full Screen Video Animation - No Extra Elements) -->
   <div id="site-preloader" class="site-preloader" aria-live="polite" aria-label="Loading Website" role="dialog" aria-modal="true">
     <!-- Fullscreen Video Background Layer -->
     <div class="preloader-media-layer">
@@ -26,9 +26,10 @@
         autoplay
         muted
         playsinline
-        loop
         preload="auto"
         webkit-playsinline
+        disablepictureinpicture
+        disableremoteplayback
       >
         <source src="/images/IMG_0919.MOV" type="video/quicktime" />
         <source src="/assets/IMG_0919-Am6PnWaQ.MOV" type="video/quicktime" />
@@ -36,30 +37,46 @@
         <source src="/assets/IMG_0919-Am6PnWaQ.MOV" type="video/mp4" />
       </video>
 
-      <!-- Mobile Video Animation (IMG_0923.MOV) -->
+      <!-- Mobile Video Animation (IMG_0956.MP4) -->
       <video
         id="preloader-video-mobile"
         class="preloader-video preloader-video-mobile"
         autoplay
         muted
         playsinline
-        loop
         preload="auto"
         webkit-playsinline
+        disablepictureinpicture
+        disableremoteplayback
       >
-        <source src="/images/IMG_0923.MOV" type="video/quicktime" />
-        <source src="/assets/IMG_0923-C9GX_nx2.MOV" type="video/quicktime" />
-        <source src="/images/IMG_0923.mp4" type="video/mp4" />
-        <source src="/assets/IMG_0923-C9GX_nx2.MOV" type="video/mp4" />
+        <source src="/images/IMG_0956.MP4" type="video/mp4" />
+        <source src="/assets/IMG_0956-D-3DwoQq.MP4" type="video/mp4" />
       </video>
     </div>
 
-    <!-- Bottom Progress Bar (Pure glowing loading bar, strictly no text banners) -->
-    <div class="preloader-controls" id="preloader-controls">
-      <div class="preloader-progress-track">
-        <div class="preloader-progress-fill" id="preloader-progress-fill"></div>
-      </div>
-    </div>
+    <!-- Instant Hardware-Accelerated Video Starter -->
+    <script>
+      (function() {
+        try {
+          var isMobile = window.innerWidth <= 768;
+          var activeVid = document.getElementById(isMobile ? 'preloader-video-mobile' : 'preloader-video-desktop');
+          var inactiveVid = document.getElementById(isMobile ? 'preloader-video-desktop' : 'preloader-video-mobile');
+          if (inactiveVid) {
+            inactiveVid.preload = 'none';
+            try { inactiveVid.pause(); } catch (e) {}
+          }
+          if (activeVid) {
+            activeVid.muted = true;
+            activeVid.defaultMuted = true;
+            activeVid.playsInline = true;
+            var promise = activeVid.play();
+            if (promise && typeof promise.catch === 'function') {
+              promise.catch(function() {});
+            }
+          }
+        } catch (e) {}
+      })();
+    </script>
   </div>
 
   <!-- Background Fixed Scroll Animation Canvas -->
@@ -381,8 +398,15 @@
                         <span class="h-tag">Node.js</span>
                       </div>
                       <div class="h-card-footer">
-                        <span class="h-card-link">View Project</span>
-                        <span class="h-card-arrow">↗</span>
+                          <a
+                              class="h-card-link"
+                              href="https://github.com/kevinnfw/ArenaKita-Frontend"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                          >View Project</a>
+
+                          <span class="h-card-arrow">↗</span>
+
                       </div>
                     </div>
                   </div>
@@ -410,8 +434,15 @@
                         <span class="h-tag">PHP</span>
                       </div>
                       <div class="h-card-footer">
-                        <span class="h-card-link">View Project</span>
-                        <span class="h-card-arrow">↗</span>
+                          <a
+                              class="h-card-link"
+                              href="https://github.com/kevinnfw/Rebranding-Web-SMPN-5-Semarang"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                          >View Project</a>
+
+                          <span class="h-card-arrow">↗</span>
+
                       </div>
                     </div>
                   </div>
@@ -440,8 +471,15 @@
                         <span class="h-tag">NLP</span>
                       </div>
                       <div class="h-card-footer">
-                        <span class="h-card-link">View Project</span>
-                        <span class="h-card-arrow">↗</span>
+                          <a
+                              class="h-card-link"
+                              href="https://github.com/kevinnfw/Sell-the-News-Cryptocurrency"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                          >View Project</a>
+
+                          <span class="h-card-arrow">↗</span>
+
                       </div>
                     </div>
                   </div>
@@ -470,8 +508,15 @@
                         <span class="h-tag">Firebase</span>
                       </div>
                       <div class="h-card-footer">
-                        <span class="h-card-link">View Project</span>
-                        <span class="h-card-arrow">↗</span>
+                          <a
+                              class="h-card-link"
+                              href="https://github.com/kevinnfw/WarungAjib"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                          >View Project</a>
+
+                          <span class="h-card-arrow">↗</span>
+
                       </div>
                     </div>
                   </div>
@@ -500,8 +545,15 @@
                         <span class="h-tag">PHP</span>
                       </div>
                       <div class="h-card-footer">
-                        <span class="h-card-link">View Project</span>
-                        <span class="h-card-arrow">↗</span>
+                          <a
+                              class="h-card-link"
+                              href="https://github.com/kevinnfw/NAPI-NyariKopi"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                          >View Project</a>
+
+                          <span class="h-card-arrow">↗</span>
+
                       </div>
                     </div>
                   </div>
@@ -531,8 +583,15 @@
                         <span class="h-tag">SMOTE</span>
                       </div>
                       <div class="h-card-footer">
-                        <span class="h-card-link">View Project</span>
-                        <span class="h-card-arrow">↗</span>
+                          <a
+                              class="h-card-link"
+                              href="https://colab.research.google.com/drive/1embhJzh1phULR6QK5OsYsb10Dj7yY_VW?authuser=2"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                          >View Project</a>
+
+                          <span class="h-card-arrow">↗</span>
+
                       </div>
                     </div>
                   </div>
@@ -1330,27 +1389,33 @@
   </article>
 </div>
 
-          <!-- Bottom Interaction Controls Bar -->
-          <div class="cert-controls-bar">
-            <button class="cert-nav-btn" id="cert-btn-prev" aria-label="Rotate Previous Certification">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="15 18 9 12 15 6" />
-              </svg>
-            </button>
-            <div class="cert-status-indicator">
-              <span class="cert-dot-pulse"></span>
-              <span class="cert-status-text">CLICK CARD TO ZOOM &bull; CLICK AGAIN TO RESUME</span>
             </div>
-            <button class="cert-nav-btn" id="cert-btn-next" aria-label="Rotate Next Certification">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="9 18 15 12 9 6" />
-              </svg>
-            </button>
           </div>
-
         </div>
+
+        <!-- Neon Blue Drag / Swipe Controls Bar (Web & Mobile) -->
+        <div class="cert-drag-controls" id="cert-drag-controls" aria-label="Certifications carousel navigation">
+          <button type="button" class="cert-drag-nav-btn cert-drag-prev" id="cert-btn-prev" aria-label="Rotate Previous Certification">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <div class="cert-drag-pill" id="cert-drag-pill" role="button" aria-label="Drag or swipe to rotate certifications" tabindex="0">
+            <span class="cert-neon-dot"></span>
+            <svg class="cert-drag-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="7 8 3 12 7 16"></polyline>
+              <polyline points="17 8 21 12 17 16"></polyline>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+            </svg>
+            <span class="cert-drag-label">DRAG / SWIPE</span>
+          </div>
+          <button type="button" class="cert-drag-nav-btn cert-drag-next" id="cert-btn-next" aria-label="Rotate Next Certification">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+
       </div>
     </section>
 

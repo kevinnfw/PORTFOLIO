@@ -77,8 +77,8 @@ const server = http.createServer((req, res) => {
       'Accept-Ranges': 'bytes',
     };
 
-    // Aggressive caching for images to make scrubbing completely stutter-free
-    if (ext === '.jpg' || ext === '.jpeg' || ext === '.png' || ext === '.webp') {
+    // Aggressive caching for media to make playback completely stutter-free
+    if (ext === '.jpg' || ext === '.jpeg' || ext === '.png' || ext === '.webp' || ext === '.mp4' || ext === '.mov') {
       headers['Cache-Control'] = 'public, max-age=31536000, immutable';
     } else {
       headers['Cache-Control'] = 'no-cache';

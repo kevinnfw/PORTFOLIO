@@ -798,6 +798,8 @@
   const section = document.getElementById('certifications');
   const btnPrev = document.getElementById('cert-btn-prev');
   const btnNext = document.getElementById('cert-btn-next');
+  const mobilePrev = document.getElementById('cert-mobile-prev');
+  const mobileNext = document.getElementById('cert-mobile-next');
 
   if (!ring || !stage) return;
 
@@ -989,6 +991,9 @@
     }
   });
 
+  const dragControls = document.getElementById('cert-drag-controls');
+  const dragPill = document.getElementById('cert-drag-pill');
+
   // 4. Drag & Swipe Interaction
   function startDrag(clientX) {
     isDragging = true;
@@ -997,6 +1002,7 @@
     dragVelocity = 0;
     dragDistance = 0;
     stage.classList.add('is-dragging');
+    if (dragControls) dragControls.classList.add('is-dragging');
   }
 
   function moveDrag(clientX) {
@@ -1013,6 +1019,7 @@
     if (!isDragging) return;
     isDragging = false;
     stage.classList.remove('is-dragging');
+    if (dragControls) dragControls.classList.remove('is-dragging');
 
     // If card was zoomed and user dragged, deselect it
     if (dragDistance > 12 && zoomedCard) {
@@ -1038,6 +1045,40 @@
     startDrag(e.clientX);
   });
 
+  if (dragControls) {
+    dragControls.addEventListener('mousedown', (e) => {
+      if (e.target.closest('.cert-drag-nav-btn')) return;
+      startDrag(e.clientX);
+    });
+
+    dragControls.addEventListener('touchstart', (e) => {
+      if (e.target.closest('.cert-drag-nav-btn')) return;
+      if (e.touches.length === 1) {
+        startDrag(e.touches[0].clientX);
+      }
+    }, { passive: true });
+  }
+
+  if (dragPill) {
+    dragPill.addEventListener('click', () => {
+      if (dragDistance > 8) return;
+      stepCarousel(1);
+    });
+
+    dragPill.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        stepCarousel(1);
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        stepCarousel(-1);
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        stepCarousel(1);
+      }
+    });
+  }
+
   window.addEventListener('mousemove', (e) => {
     if (isDragging) {
       moveDrag(e.clientX);
@@ -1050,21 +1091,23 @@
     }
   });
 
-  // Touch support
+  // Touch support for both stage & window
   stage.addEventListener('touchstart', (e) => {
     if (e.touches.length === 1) {
       startDrag(e.touches[0].clientX);
     }
   }, { passive: true });
 
-  stage.addEventListener('touchmove', (e) => {
+  window.addEventListener('touchmove', (e) => {
     if (isDragging && e.touches.length === 1) {
       moveDrag(e.touches[0].clientX);
     }
   }, { passive: true });
 
-  stage.addEventListener('touchend', () => {
-    endDrag();
+  window.addEventListener('touchend', () => {
+    if (isDragging) {
+      endDrag();
+    }
   });
 
   // 5. Navigation Buttons (Prev / Next)
@@ -1079,21 +1122,23 @@
     });
   }
 
-  if (btnPrev) {
-    btnPrev.addEventListener('click', (e) => {
+  const prevButtons = [btnPrev, mobilePrev].filter(Boolean);
+  prevButtons.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
       stepCarousel(-1);
     });
-  }
+  });
 
-  if (btnNext) {
-    btnNext.addEventListener('click', (e) => {
+  const nextButtons = [btnNext, mobileNext].filter(Boolean);
+  nextButtons.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
       stepCarousel(1);
     });
-  }
+  });
 })();
 
 /* -------------------------------------------------------------
@@ -1213,15 +1258,14 @@
 
 /* -------------------------------------------------------------
    Website Opening Video Animation Preloader Controller
-   Pure video animation with clean loading bar (No text banners)
+   Strictly video animation only (No extra elements) - High performance
    ------------------------------------------------------------- */
 (function initOpeningAnimation() {
   const preloader = document.getElementById('site-preloader');
   const desktopVideo = document.getElementById('preloader-video-desktop');
   const mobileVideo = document.getElementById('preloader-video-mobile');
-  const fillEl = document.getElementById('preloader-progress-fill');
 
-  if (!preloader || !fillEl) {
+  if (!preloader) {
     document.body.classList.remove('is-loading');
     if (window.__lenis) {
       try { window.__lenis.start(); } catch (e) {}
@@ -1243,85 +1287,54 @@
   if (inactiveVideo) {
     try {
       inactiveVideo.pause();
+      inactiveVideo.preload = 'none';
     } catch (e) {}
   }
 
-  // Try playing active video immediately
+  // Try playing active video immediately with hardware acceleration
   if (activeVideo) {
     activeVideo.muted = true;
+    activeVideo.defaultMuted = true;
+    activeVideo.playsInline = true;
     const playPromise = activeVideo.play();
     if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        // Autoplay policy or format fallback - timer will smoothly finish
-      });
+      playPromise.catch(() => {});
     }
   }
 
-  const duration = 2000; // Matches video duration (~1.97s - 1.99s)
-  const startTime = performance.now();
   let completed = false;
-
   function finishPreloader() {
     if (completed) return;
     completed = true;
 
-    if (fillEl) fillEl.style.width = '100%';
+    preloader.classList.add('is-hidden');
+    document.body.classList.remove('is-loading');
+
+    if (window.__lenis) {
+      try {
+        window.__lenis.start();
+      } catch (e) {}
+    }
 
     setTimeout(() => {
-      preloader.classList.add('is-hidden');
-      document.body.classList.remove('is-loading');
-
-      if (window.__lenis) {
-        try {
-          window.__lenis.start();
-        } catch (e) {}
-      }
-
-      setTimeout(() => {
-        preloader.style.display = 'none';
-        if (desktopVideo) try { desktopVideo.pause(); } catch (e) {}
-        if (mobileVideo) try { mobileVideo.pause(); } catch (e) {}
-      }, 650);
-    }, 120);
+      preloader.style.display = 'none';
+      if (desktopVideo) try { desktopVideo.pause(); } catch (e) {}
+      if (mobileVideo) try { mobileVideo.pause(); } catch (e) {}
+    }, 650);
   }
 
   if (activeVideo) {
-    activeVideo.addEventListener('ended', () => {
-      finishPreloader();
+    activeVideo.addEventListener('ended', finishPreloader, { once: true });
+
+    // Smoothly finish right as the video completes playback
+    activeVideo.addEventListener('timeupdate', function onTimeUpdate() {
+      if (activeVideo.duration > 0 && activeVideo.currentTime >= (activeVideo.duration - 0.08)) {
+        activeVideo.removeEventListener('timeupdate', onTimeUpdate);
+        finishPreloader();
+      }
     });
   }
 
-  function update(currentTime) {
-    if (completed) return;
-
-    const elapsed = currentTime - startTime;
-    let timeProgress = Math.min(1, Math.max(0, elapsed / duration));
-
-    // If active video is playing and has duration, sync progress
-    let videoProgress = 0;
-    if (activeVideo && activeVideo.duration > 0 && !isNaN(activeVideo.duration)) {
-      videoProgress = Math.min(1, Math.max(0, activeVideo.currentTime / activeVideo.duration));
-    }
-
-    const currentProgress = Math.max(timeProgress, videoProgress);
-
-    // Smooth natural easing
-    const eased = 1 - Math.pow(1 - currentProgress, 2.6);
-    const percent = Math.min(100, Math.max(0, Math.round(eased * 100)));
-
-    fillEl.style.width = percent + '%';
-
-    if (currentProgress < 1) {
-      requestAnimationFrame(update);
-    } else {
-      finishPreloader();
-    }
-  }
-
-  requestAnimationFrame(update);
-
-  // Safety fallback: guaranteed dismissal within 2.4s
-  setTimeout(() => {
-    finishPreloader();
-  }, 2400);
+  // Safety fallback: guaranteed dismissal if video stream completes or delays
+  setTimeout(finishPreloader, 2300);
 })();
