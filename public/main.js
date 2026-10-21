@@ -1,196 +1,332 @@
 (function () {
-  const TOTAL_FRAMES = 240;
-  const canvas = document.getElementById('animation-canvas');
-  const ctx = canvas.getContext('2d', { alpha: false });
+    'use strict';
 
-  const images = new Array(TOTAL_FRAMES);
-  const loadedFlags = new Array(TOTAL_FRAMES).fill(false);
+    const TOTAL_FRAMES = 240;
 
-  let currentFrame = 0;
-  let targetFrame = 0;
-  let lastDrawnIndex = -1;
-  let needsResize = true;
+    // Optimasi pemuatan gambar, tanpa mengurangi resolusi.
+    const MAX_CONCURRENT_LOADS = 4;
+    const PRELOAD_BEHIND = 8;
+    const PRELOAD_AHEAD = 20;
 
-  // Format frame number to 3-digit string (001, 002, ..., 240)
-  function getFrameSrc(index) {
-    const frameNumber = String(index + 1).padStart(3, '0');
-    return `/frames/ezgif-frame-${frameNumber}.jpg`;
-  }
+    const canvas = document.getElementById('animation-canvas');
 
-  // Adjust canvas buffer resolution with device pixel ratio
-  function resizeCanvas() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const displayWidth = window.innerWidth;
-    const displayHeight = window.innerHeight;
+    if (!canvas) return;
 
-    const targetWidth = Math.round(displayWidth * dpr);
-    const targetHeight = Math.round(displayHeight * dpr);
-
-    if (canvas.width !== targetWidth || canvas.height !== targetHeight) {
-      canvas.width = targetWidth;
-      canvas.height = targetHeight;
-    }
-
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = 'high';
-  }
-
-  // Draw specific frame using object-fit: cover math
-  function drawFrame(index) {
-    if (canvas.width === 0 || canvas.height === 0) {
-      resizeCanvas();
-    }
-
-    let img = images[index];
-
-    // If target frame is not loaded yet, find the closest loaded frame to avoid flickering
-    if (!loadedFlags[index] || !img || !img.complete || img.naturalWidth === 0) {
-      let closestIndex = -1;
-      let minDistance = Infinity;
-
-      for (let i = 0; i < TOTAL_FRAMES; i++) {
-        if (loadedFlags[i] && images[i] && images[i].complete && images[i].naturalWidth > 0) {
-          const dist = Math.abs(i - index);
-          if (dist < minDistance) {
-            minDistance = dist;
-            closestIndex = i;
-          }
-        }
-      }
-
-      if (closestIndex !== -1) {
-        img = images[closestIndex];
-      } else {
-        return;
-      }
-    }
-
-    const canvasWidth = canvas.width;
-    const canvasHeight = canvas.height;
-    const imgWidth = img.naturalWidth;
-    const imgHeight = img.naturalHeight;
-
-    const canvasRatio = canvasWidth / canvasHeight;
-    const imgRatio = imgWidth / imgHeight;
-
-    let drawW, drawH, drawX, drawY;
-
-    if (canvasRatio > imgRatio) {
-      drawW = canvasWidth;
-      drawH = canvasWidth / imgRatio;
-      drawX = 0;
-      drawY = (canvasHeight - drawH) / 2;
-    } else {
-      drawH = canvasHeight;
-      drawW = canvasHeight * imgRatio;
-      drawX = (canvasWidth - drawW) / 2;
-      drawY = 0;
-    }
-
-    ctx.drawImage(img, drawX, drawY, drawW, drawH);
-  }
-
-  // Preload images into memory with robust onload binding
-  function preloadImages() {
-    // 1. Preload first frame immediately to render instant cover
-    const firstImg = new Image();
-    firstImg.onload = () => {
-      images[0] = firstImg;
-      loadedFlags[0] = true;
-      resizeCanvas();
-      drawFrame(0);
-      lastDrawnIndex = 0;
-    };
-    firstImg.src = getFrameSrc(0);
-    images[0] = firstImg;
-    if (firstImg.complete) {
-      firstImg.onload();
-    }
-
-    // 2. Preload remaining frames
-    for (let i = 1; i < TOTAL_FRAMES; i++) {
-      const img = new Image();
-      const idx = i;
-      img.onload = () => {
-        images[idx] = img;
-        loadedFlags[idx] = true;
-        if (Math.round(currentFrame) === idx) {
-          drawFrame(idx);
-          lastDrawnIndex = idx;
-        }
-      };
-      img.src = getFrameSrc(idx);
-      images[idx] = img;
-      if (img.complete) {
-        img.onload();
-      }
-    }
-  }
-
-  // Initialize smooth momentum scroll via Lenis
-  let lenisInstance = null;
-  if (typeof window.Lenis !== 'undefined') {
-    lenisInstance = new window.Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      wheelMultiplier: 1.0,
-      touchMultiplier: 1.5,
+    const ctx = canvas.getContext('2d', {
+        alpha: false
     });
-    window.__lenis = lenisInstance;
-  }
 
-  window.addEventListener('resize', () => {
-    needsResize = true;
-  });
+    if (!ctx) return;
 
-  // Main animation render loop
-  function render(time) {
-    if (lenisInstance) {
-      lenisInstance.raf(time);
+    const images = new Array(TOTAL_FRAMES);
+    const loadedFlags = new Array(TOTAL_FRAMES).fill(false);
+    const loadingFlags = new Array(TOTAL_FRAMES).fill(false);
+
+    const loadQueue = new Set();
+
+    let activeLoads = 0;
+    let currentFrame = 0;
+    let targetFrame = 0;
+    let lastDrawnIndex = -1;
+    let lastQueueCenter = -1;
+    let lastTime = 0;
+    let needsResize = true;
+
+    let lenisInstance = null;
+
+    function getFrameSrc(index) {
+        const frameNumber = String(index + 1).padStart(3, '0');
+
+        return `/frames/ezgif-frame-${frameNumber}.jpg`;
     }
 
-    if (needsResize) {
-      resizeCanvas();
-      needsResize = false;
-      lastDrawnIndex = -1; // force redraw on canvas resize
+    // Resolusi Canvas tetap mengikuti kode asli.
+    function resizeCanvas() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        const targetWidth = Math.round(window.innerWidth * dpr);
+        const targetHeight = Math.round(window.innerHeight * dpr);
+
+        if (
+            canvas.width !== targetWidth ||
+            canvas.height !== targetHeight
+        ) {
+            canvas.width = targetWidth;
+            canvas.height = targetHeight;
+        }
+
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
     }
 
-    // Calculate current scroll position with Lenis or native fallback
-    let currentScroll = window.pageYOffset || document.documentElement.scrollTop || window.scrollY || 0;
-    if (lenisInstance && typeof lenisInstance.scroll === 'number') {
-      currentScroll = lenisInstance.scroll;
+    function drawFrame(index) {
+        if (!loadedFlags[index]) {
+            // Gunakan frame terdekat yang sudah siap.
+            // Pencarian hanya dilakukan jika frame target belum tersedia.
+            let closestIndex = -1;
+            let minDistance = Infinity;
+
+            for (let i = 0; i < TOTAL_FRAMES; i++) {
+                if (
+                    loadedFlags[i] &&
+                    images[i] &&
+                    images[i].naturalWidth > 0
+                ) {
+                    const distance = Math.abs(i - index);
+
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        closestIndex = i;
+                    }
+                }
+            }
+
+            if (closestIndex === -1) return;
+
+            index = closestIndex;
+        }
+
+        const img = images[index];
+
+        if (!img || !img.naturalWidth || !img.naturalHeight) {
+            return;
+        }
+
+        const canvasWidth = canvas.width;
+        const canvasHeight = canvas.height;
+
+        const canvasRatio = canvasWidth / canvasHeight;
+        const imageRatio = img.naturalWidth / img.naturalHeight;
+
+        let drawW;
+        let drawH;
+        let drawX;
+        let drawY;
+
+        // Pertahankan perilaku object-fit: cover.
+        if (canvasRatio > imageRatio) {
+            drawW = canvasWidth;
+            drawH = canvasWidth / imageRatio;
+            drawX = 0;
+            drawY = (canvasHeight - drawH) / 2;
+        } else {
+            drawH = canvasHeight;
+            drawW = canvasHeight * imageRatio;
+            drawX = (canvasWidth - drawW) / 2;
+            drawY = 0;
+        }
+
+        ctx.drawImage(img, drawX, drawY, drawW, drawH);
     }
 
-    const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-    const progress = Math.max(0, Math.min(1, currentScroll / maxScroll));
+    function pumpLoadQueue() {
+        while (
+            activeLoads < MAX_CONCURRENT_LOADS &&
+            loadQueue.size > 0
+        ) {
+            let bestIndex = -1;
+            let bestDistance = Infinity;
 
-    targetFrame = progress * (TOTAL_FRAMES - 1);
+            // Selalu pilih frame yang paling dekat dengan posisi scroll.
+            for (const index of loadQueue) {
+                const distance = Math.abs(index - targetFrame);
 
-    // Smooth lerp damping (0.14 factor provides responsive yet buttery scrub inertia)
-    currentFrame += (targetFrame - currentFrame) * 0.14;
+                if (distance < bestDistance) {
+                    bestDistance = distance;
+                    bestIndex = index;
+                }
+            }
 
-    // Snap when extremely close to save CPU/GPU cycles
-    if (Math.abs(targetFrame - currentFrame) < 0.001) {
-      currentFrame = targetFrame;
+            if (bestIndex === -1) break;
+
+            loadQueue.delete(bestIndex);
+
+            if (
+                loadedFlags[bestIndex] ||
+                loadingFlags[bestIndex]
+            ) {
+                continue;
+            }
+
+            loadingFlags[bestIndex] = true;
+            activeLoads++;
+
+            const img = new Image();
+
+            img.decoding = 'async';
+
+            img.onload = function () {
+                images[bestIndex] = img;
+                loadedFlags[bestIndex] = true;
+                loadingFlags[bestIndex] = false;
+                activeLoads--;
+
+                const currentIndex = Math.min(
+                    TOTAL_FRAMES - 1,
+                    Math.max(0, Math.round(currentFrame))
+                );
+
+                // Segera tampilkan frame target jika baru selesai dimuat.
+                // Jika belum, perbarui fallback agar gerakan tidak membeku.
+                if (
+                    currentIndex === bestIndex ||
+                    !loadedFlags[currentIndex]
+                ) {
+                    drawFrame(currentIndex);
+                    lastDrawnIndex = currentIndex;
+                }
+
+                pumpLoadQueue();
+            };
+
+            img.onerror = function () {
+                loadingFlags[bestIndex] = false;
+                activeLoads--;
+
+                // Jangan terus-menerus mengulang gambar yang gagal.
+                pumpLoadQueue();
+            };
+
+            img.src = getFrameSrc(bestIndex);
+            images[bestIndex] = img;
+        }
     }
 
-    const roundedIndex = Math.min(TOTAL_FRAMES - 1, Math.max(0, Math.round(currentFrame)));
+    function updatePreloadQueue(center) {
+        if (center === lastQueueCenter) return;
 
-    if (roundedIndex !== lastDrawnIndex) {
-      drawFrame(roundedIndex);
-      lastDrawnIndex = roundedIndex;
+        lastQueueCenter = center;
+
+        const start = Math.max(0, center - PRELOAD_BEHIND);
+        const end = Math.min(
+            TOTAL_FRAMES - 1,
+            center + PRELOAD_AHEAD
+        );
+
+        // Buang antrean lama yang jauh dari posisi scroll saat ini.
+        for (const index of loadQueue) {
+            if (index < start || index > end) {
+                loadQueue.delete(index);
+            }
+        }
+
+        // Muat frame di sekitar posisi scroll, bukan 240 gambar sekaligus.
+        for (let i = start; i <= end; i++) {
+            if (!loadedFlags[i] && !loadingFlags[i]) {
+                loadQueue.add(i);
+            }
+        }
+
+        pumpLoadQueue();
     }
+
+    // Pertahankan Lenis dan konfigurasi scroll yang sudah ada.
+    if (typeof window.Lenis !== 'undefined') {
+        lenisInstance = new window.Lenis({
+            duration: 1.2,
+            easing: (t) =>
+                Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            orientation: 'vertical',
+            gestureOrientation: 'vertical',
+            smoothWheel: true,
+            wheelMultiplier: 1.0,
+            touchMultiplier: 1.5
+        });
+
+        window.__lenis = lenisInstance;
+    }
+
+    window.addEventListener('resize', function () {
+        needsResize = true;
+    }, { passive: true });
+
+    function render(time) {
+        requestAnimationFrame(render);
+
+        // Hindari pekerjaan render saat tab tidak terlihat.
+        if (document.hidden) {
+            lastTime = 0;
+            return;
+        }
+
+        if (lenisInstance) {
+            lenisInstance.raf(time);
+        }
+
+        if (needsResize) {
+            resizeCanvas();
+            needsResize = false;
+            lastDrawnIndex = -1;
+        }
+
+        let currentScroll =
+            window.pageYOffset ||
+            document.documentElement.scrollTop ||
+            window.scrollY ||
+            0;
+
+        if (
+            lenisInstance &&
+            typeof lenisInstance.scroll === 'number'
+        ) {
+            currentScroll = lenisInstance.scroll;
+        }
+
+        const maxScroll = Math.max(
+            1,
+            document.documentElement.scrollHeight -
+                window.innerHeight
+        );
+
+        const progress = Math.max(
+            0,
+            Math.min(1, currentScroll / maxScroll)
+        );
+
+        targetFrame = progress * (TOTAL_FRAMES - 1);
+
+        const targetIndex = Math.min(
+            TOTAL_FRAMES - 1,
+            Math.max(0, Math.round(targetFrame))
+        );
+
+        // Pemuatan gambar mengikuti posisi scroll terbaru.
+        updatePreloadQueue(targetIndex);
+
+        // Perhitungan smoothing berdasarkan waktu, bukan jumlah frame
+        // monitor, sehingga gerakan lebih konsisten pada perangkat berbeda.
+        const delta = lastTime
+            ? Math.min(time - lastTime, 50)
+            : 16.67;
+
+        lastTime = time;
+
+        const smoothing = 1 - Math.exp(-delta / 110);
+
+        currentFrame +=
+            (targetFrame - currentFrame) * smoothing;
+
+        if (Math.abs(targetFrame - currentFrame) < 0.001) {
+            currentFrame = targetFrame;
+        }
+
+        const frameIndex = Math.min(
+            TOTAL_FRAMES - 1,
+            Math.max(0, Math.round(currentFrame))
+        );
+
+        // Gambar ulang hanya jika frame berubah.
+        if (frameIndex !== lastDrawnIndex) {
+            drawFrame(frameIndex);
+            lastDrawnIndex = frameIndex;
+        }
+    }
+
+    // Siapkan Canvas dan mulai dari frame awal.
+    resizeCanvas();
+    updatePreloadQueue(0);
 
     requestAnimationFrame(render);
-  }
-
-  // Kick off preloading, canvas setup, and render loop
-  resizeCanvas();
-  preloadImages();
-  requestAnimationFrame(render);
 })();
 
 /* -------------------------------------------------------------

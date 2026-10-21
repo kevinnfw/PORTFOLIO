@@ -2234,6 +2234,21 @@ body {
   transition: transform 0.25s ease;
 }
 
+.h-card-link {
+    color: #00A3FF;
+    text-decoration: none !important;
+    font: inherit;
+    cursor: pointer;
+}
+
+.h-card-link:hover,
+.h-card-link:focus,
+.h-card-link:active,
+.h-card-link:visited {
+    color: #00A3FF;
+    text-decoration: none !important;
+}
+
 .h-card:hover .h-card-footer {
   transform: translateX(4px);
 }
