@@ -4,9 +4,9 @@
   const TOTAL_FRAMES = 240;
 
   // Optimasi pemuatan gambar, tanpa mengurangi resolusi.
-  const MAX_CONCURRENT_LOADS = 4;
-  const PRELOAD_BEHIND = 8;
-  const PRELOAD_AHEAD = 20;
+  const MAX_CONCURRENT_LOADS = 6;
+const PRELOAD_BEHIND = 12;
+const PRELOAD_AHEAD = 36;
 
   const canvas = document.getElementById('animation-canvas');
 
