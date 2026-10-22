@@ -1199,7 +1199,7 @@ const PRELOAD_AHEAD = 36;
           </svg>
           <div>
             <strong>Message Sent Successfully!</strong><br />
-            Thank you, your inquiry has been sent to kevinfarell1958@gmail.com. I will get back to you shortly.
+            Thank you for reaching out. I'll get back to you soon.
           </div>
         `;
         statusEl.style.display = 'flex';
