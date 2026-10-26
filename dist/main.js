@@ -494,6 +494,102 @@ const PRELOAD_AHEAD = 36;
 })();
 
 /* -------------------------------------------------------------
+   BEM FIK (Now BEM FDKK) Showcase Scroller Controller
+   Interactive mouse drag, touch swipe, prev/next buttons & drag pill
+   ------------------------------------------------------------- */
+(function initBemWorksScroller() {
+  const wrapper = document.getElementById('bem-scroller-wrapper');
+  const track = document.getElementById('bem-track');
+  const prevBtn = document.getElementById('bem-prev-btn');
+  const nextBtn = document.getElementById('bem-next-btn');
+  const dragPill = document.getElementById('bem-drag-pill');
+  if (!wrapper || !track) return;
+
+  let isDown = false;
+  let startX = 0;
+  let scrollLeft = 0;
+  let hasDragged = false;
+
+  const startDrag = (e) => {
+    isDown = true;
+    hasDragged = false;
+    wrapper.classList.add('is-dragging');
+    startX = e.pageX - wrapper.offsetLeft;
+    scrollLeft = wrapper.scrollLeft;
+  };
+
+  const endDrag = () => {
+    if (isDown) {
+      isDown = false;
+      wrapper.classList.remove('is-dragging');
+    }
+  };
+
+  const moveDrag = (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - wrapper.offsetLeft;
+    const walk = (x - startX) * 1.6;
+    if (Math.abs(walk) > 6) hasDragged = true;
+    wrapper.scrollLeft = scrollLeft - walk;
+  };
+
+  wrapper.addEventListener('mousedown', startDrag);
+  if (dragPill) {
+    dragPill.addEventListener('mousedown', startDrag);
+  }
+
+  window.addEventListener('mouseup', endDrag);
+  wrapper.addEventListener('mousemove', moveDrag);
+
+  // Prev / Next scroll buttons
+  const scrollStep = 340; // width of card + gap
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      wrapper.scrollBy({ left: -scrollStep, behavior: 'smooth' });
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      wrapper.scrollBy({ left: scrollStep, behavior: 'smooth' });
+    });
+  }
+
+  // Prevent link click when user was dragging
+  wrapper.querySelectorAll('.btn-bem-discover').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      if (hasDragged) {
+        e.preventDefault();
+      }
+    });
+  });
+
+  // Touch handling
+  let touchStartX = 0;
+  let touchScrollLeft = 0;
+
+  wrapper.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) {
+      touchStartX = e.touches[0].pageX;
+      touchScrollLeft = wrapper.scrollLeft;
+      hasDragged = false;
+    }
+  }, { passive: true });
+
+  wrapper.addEventListener('touchmove', (e) => {
+    if (e.touches.length === 1) {
+      const touchX = e.touches[0].pageX;
+      const walk = (touchX - touchStartX) * 1.3;
+      if (Math.abs(walk) > 8) hasDragged = true;
+      wrapper.scrollLeft = touchScrollLeft - walk;
+    }
+  }, { passive: true });
+})();
+
+/* -------------------------------------------------------------
    Projects Section: Editorial Kinetic Typography & 3D Floating Cards
    ------------------------------------------------------------- */
 (function initProjectsMotionDesign() {
@@ -1199,7 +1295,7 @@ const PRELOAD_AHEAD = 36;
           </svg>
           <div>
             <strong>Message Sent Successfully!</strong><br />
-            Thank you for reaching out. I'll get back to you soon.
+            Thank you, your inquiry has been sent to kevinfarell1958@gmail.com. I will get back to you shortly.
           </div>
         `;
         statusEl.style.display = 'flex';
