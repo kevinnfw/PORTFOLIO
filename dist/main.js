@@ -262,14 +262,8 @@ const PRELOAD_AHEAD = 36;
 
     lastTime = time;
 
-    const smoothing = 1 - Math.exp(-delta / 110);
-
-    currentFrame +=
-      (targetFrame - currentFrame) * smoothing;
-
-    if (Math.abs(targetFrame - currentFrame) < 0.001) {
-      currentFrame = targetFrame;
-    }
+    // Sinkronkan frame langsung dengan posisi scroll.
+currentFrame = targetFrame;
 
     const frameIndex = Math.min(
       TOTAL_FRAMES - 1,
@@ -306,6 +300,7 @@ const PRELOAD_AHEAD = 36;
   const tagEl = document.getElementById('slide-tag');
   const headlineEl = document.getElementById('slide-headline');
   const descEl = document.getElementById('slide-desc');
+  const discoverBtn = slider.querySelector('.slider-cta-pill');
   const counterEl = document.getElementById('slide-counter');
   const progressBar = document.getElementById('slider-progress-bar');
   const prevBtn = document.getElementById('slide-prev');
@@ -354,6 +349,18 @@ const PRELOAD_AHEAD = 36;
     // Wrap-around index
     currentIndex = (index + slidesData.length) % slidesData.length;
     const currentData = slidesData[currentIndex];
+    const experienceLinks = [
+  'https://www.instagram.com/bemfdkkudinus/',
+  'https://www.instagram.com/diskominfokotasemarang?exln=MTV4ZDZtbGJnMWdsag==',
+  '#',
+  'https://www.tiktok.com/@tosorvest.id?_r=1&_t=ZS-9AseEsWl9J1'
+];
+
+if (discoverBtn) {
+  discoverBtn.href = experienceLinks[currentIndex];
+  discoverBtn.target = '_blank';
+  discoverBtn.rel = 'noopener noreferrer';
+}
 
     // 1. Cross-fade Background
     bgLayers.forEach((bg) => {

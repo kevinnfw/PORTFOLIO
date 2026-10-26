@@ -262,14 +262,8 @@ const PRELOAD_AHEAD = 36;
 
     lastTime = time;
 
-    const smoothing = 1 - Math.exp(-delta / 110);
-
-    currentFrame +=
-      (targetFrame - currentFrame) * smoothing;
-
-    if (Math.abs(targetFrame - currentFrame) < 0.001) {
-      currentFrame = targetFrame;
-    }
+    // Sinkronkan frame langsung dengan posisi scroll.
+currentFrame = targetFrame;
 
     const frameIndex = Math.min(
       TOTAL_FRAMES - 1,
